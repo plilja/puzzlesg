@@ -62,7 +62,7 @@ int charDist(char a, char b)
 void initCharDists()
 {
     for (char i = 'a'; i <= 'z'; ++i) {
-        for (int j = i; j <= 'z'; ++j) {
+        for (char j = i; j <= 'z'; ++j) {
             int d = charDist(i, j);
             char_dists[i - 'a'][j - 'a'] = d;
             char_dists[j - 'a'][i - 'a'] = d;
