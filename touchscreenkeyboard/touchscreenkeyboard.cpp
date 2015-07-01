@@ -97,7 +97,7 @@ int main()
             dict.push_back({d, w});
         }
         sort(dict.begin(), dict.end());
-        for (auto p : dict) {
+        for (auto &p : dict) {
             cout << p.second << " " << p.first << endl;
         }
     }
