@@ -8,19 +8,6 @@
 
 using namespace std;
 
-/*double EPS = 0.0000001;
-
-bool same_point(pair<double, double> p1, pair<double, double> p2)
-{
-    return fabs(p1.first - p2.first) < EPS &&
-           fabs(p1.second - p2.second) < EPS;
-}
-
-bool isEndpoint(Line &line, pair<double, double> p)
-{
-    return same_point(line.p1, p) || same_point(line.p2, p);
-}*/
-
 int main()
 {
     int n;
