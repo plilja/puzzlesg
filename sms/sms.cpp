@@ -28,7 +28,7 @@ ull checksum(string &w)
     return r;
 }
 
-void solve(string &w, vector<unordered_map<string, pair<int, int>>> &dist)
+void solve(string &w, unordered_map<string, int> &dist)
 {
     vector <ull> m(w.size(), INF);
     vector <pair<int, int>> next(w.size());
@@ -37,20 +37,24 @@ void solve(string &w, vector<unordered_map<string, pair<int, int>>> &dist)
         string sub = "";
         for (int j = 0; j < lim; ++j) {
             sub += w[i + j];
-            auto it = dist[j + 1].find(sub);
-            if (it == dist[j + 1].end()) {
-                continue;
-            }
-            ull d = it->second.first;
+            ull d = sub.size();
             if (i + j + 1 < (int) w.size()) {
                 d += m[i + j + 1];
                 d += 1; //need to press R key
             }
+            if (d >= m[i]) {
+                continue;
+            }
+
+            auto it = dist.find(sub);
+            if (it == dist.end()) {
+                continue;
+            }
+            d += abs(it->second);
 
             if (d < m[i]) {
                 m[i] = d;
-                int press_up_or_down = it->second.second;
-                next[i] = {i + j + 1, press_up_or_down};
+                next[i] = {i + j + 1, it->second};
             }
         }
     }
@@ -91,7 +95,7 @@ int main()
         dict.push_back({{checksum(word), i}, word});
     }
     sort(dict.begin(), dict.end());
-    vector<unordered_map <string, pair<int, int>>> dist(MAX_DICT_W_SIZE + 1);
+    unordered_map<string, int> dist;
     int j = 0;
     while (j < (int)dict.size()) {
         ull start = dict[j].first.first;
@@ -105,9 +109,9 @@ int main()
             int keys_down = group_size - i + j;
             string &w = dict[i].second;
             if (keys_down <= keys_up) {
-                dist[w.size()][w] = {w.size() + keys_down, -keys_down};
+                dist[w] = -keys_down;
             } else {
-                dist[w.size()][w] = {w.size() + keys_up, keys_up};
+                dist[w] = keys_up;
             }
         }
         j = end;
