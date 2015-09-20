@@ -6,7 +6,7 @@ using namespace std;
 
 char ops[] = {'-', '+', '/', '*'};
 
-int eval(vector<char> exp, int left, int i) {
+int eval(vector<char> &exp, int left, int i) {
     if (i == 3)
         return left;
     if (exp[i] == '+')
