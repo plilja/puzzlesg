@@ -16,18 +16,19 @@ for line in lines[1:N+1]:
 
 
 def dfs(g, fr, to, vis):
+    vis.add(fr)
     if fr == to:
         return [fr]
     for conn in g[fr]:
         if not conn in vis:
-            s = dfs(g, conn, to, vis | {conn})
+            s = dfs(g, conn, to, vis)
             if s != None:
                 return [fr] + s
 
 
 fr, to = lines[-1].split(' ')
 
-r = dfs(g, fr, to, {fr})
+r = dfs(g, fr, to, set())
 
 if r == None:
     print 'no route found'
