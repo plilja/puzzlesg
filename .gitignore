@@ -40,3 +40,10 @@ Contents/
 .idea
 
 *.bak
+
+#haskell
+*.hi
+
+
+unsolved
+ignored
