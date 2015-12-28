@@ -31,13 +31,23 @@ getInt :: IO Int
 getInt = do x <- getIntOp
             return (x !! 0)
 
-
 getInts :: Int -> IO [Int]
 getInts 0 = return []
 getInts n = do x <- getInt
                xs <- getInts (n - 1)
                return (x:xs)
                
+
+getIntegerOp :: IO [Integer]
+getIntegerOp = do xs <- getWordOp
+                  return (map (\x -> read x :: Integer) xs)
+
+
+
+getInteger :: IO Integer
+getInteger = do x <- getIntegerOp
+                return (x !! 0)
+
 
 getLineOp :: IO [String]
 getLineOp = getUntil (\ c -> c == '\n')
