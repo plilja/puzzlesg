@@ -10,7 +10,7 @@ main = do
 run a b = do
     let collA = (1:) $ reverse $ takeWhile (/=1) $ collatz a
         collB = (1:) $ reverse $ takeWhile (/=1) $ collatz b
-        common = filter (==True) $ zipWith (==) collA collB
+        common = takeWhile (==True) $ zipWith (==) collA collB
         aSteps = (length collA) - (length common)
         bSteps = (length collB) - (length common)
         meeting = head $ drop aSteps (reverse collA)
