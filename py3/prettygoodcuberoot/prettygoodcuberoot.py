@@ -4,7 +4,7 @@ import sys
 
 
 def solve(i, a, b):
-    m = (a + b) >> 1
+    m = (a + b) // 2
     r1 = m ** 3
     r2 = (m + 1) ** 3
     if r1 <= i and r2 >= i:
