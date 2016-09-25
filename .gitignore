@@ -38,6 +38,7 @@ bin/
 Debug/
 Contents/
 .idea
+*.iml
 
 *.bak
 
