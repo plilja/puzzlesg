@@ -40,6 +40,7 @@ add_executable(flyingsafely flyingsafely/flyingsafely.cpp flyingsafely/minspantr
 add_executable(fractionallotion fractionallotion/fractionallotion.cpp)
 add_executable(gopher2 gopher2/fordfulkerson.cpp gopher2/gopher2.cpp)
 add_executable(grandpabernie grandpabernie/grandpabernie.cpp)
+add_executable(greatswercporto greatswercporto/greatswercporto.cpp)
 add_executable(growlinggears growlinggears/growlinggears.cpp)
 add_executable(happyprime happyprime/happyprime.cpp happyprime/primesieve.cpp)
 add_executable(hillnumbers hillnumbers/hillnumbers.cpp)
