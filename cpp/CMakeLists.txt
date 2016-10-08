@@ -3,6 +3,9 @@ project(cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
+add_executable(10kindsofpeople 10kindsofpeople/10kindsofpeople.cpp)
+add_executable(2048 2048/2048.cpp)
+add_executable(4thought 4thought/4thought.cpp)
 add_executable(arable arable/arable.cpp arable/pointinpolygon.cpp arable/segmentintersection.cpp)
 add_executable(bachetsgame bachetsgame/bachetsgame.cpp)
 add_executable(backspace backspace/backspace.cpp)
