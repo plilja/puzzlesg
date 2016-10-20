@@ -18,6 +18,6 @@ readDouble :: T.Text -> Double
 readDouble ts = either (\a -> 0.0) (\a -> fst a) $ T.double ts
 
 svm :: [Double] -> Double -> [Double] -> Double
-svm ws b xs = let dotProduct = (b +) $ sum $ zipWith (*) ws xs 
+svm ws b xs = let dotProduct = sum $ zipWith (*) ws xs 
                   len = sqrt $ sum $ zipWith (*) ws ws
-               in dotProduct / len
+               in (dotProduct + b) / len
