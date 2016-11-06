@@ -23,14 +23,9 @@ int modpow(int num, int exp, int mod) {
 
 int mod(int a, int m) {
     int r = a % m;
-<<<<<<< HEAD
     if (r < 0) {
         r += m;
     }
-=======
-    if (r < 0)
-        r += m;
->>>>>>> 242dd10... seti
     return r;
 }
 
