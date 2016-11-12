@@ -7,9 +7,9 @@ using namespace std;
 
 class Trie {
 public:
-    Trie(int _most_common_string_id) :
+    Trie(string *_most_common_string) :
             next(26, NULL),
-            most_common_string_id(_most_common_string_id) {
+            most_common_string(_most_common_string) {
     }
 
     ~Trie() {
@@ -20,38 +20,38 @@ public:
         }
     }
 
-    void insert(string &s, int string_id) {
-        insert(s, string_id, 0);
+    void insert(string *s) {
+        insert(s, 0);
     }
 
     Trie *lookup(char c) {
         return next[c - 'a'];
     }
 
-    int most_common_word() {
-        return most_common_string_id;
+    string *most_common_word() {
+        return most_common_string;
     }
 
 private:
-    void insert(string &s, int string_id, int i) {
-        if (i >= s.size()) {
+    void insert(string *s, int i) {
+        if (i >= s->size()) {
             return;
         }
-        int c = s[i] - 'a';
+        int c = (*s)[i] - 'a';
         if (next[c] == NULL) {
-            next[c] = new Trie(string_id);
+            next[c] = new Trie(s);
         }
-        next[c]->insert(s, string_id, i + 1);
+        next[c]->insert(s, i + 1);
     }
 
     vector<Trie *> next;
-    int most_common_string_id;
+    string *most_common_string;
 };
 
-int solve(Trie &trie, vector<string> &dict, string &q) {
+int solve(Trie &trie, string &q) {
     int ans = (int) q.size();
     Trie *t = &trie;
-    int prev_most_common = -1;
+    string *prev_most_common = NULL;
     int prev_most_common_start = 0;
     int running_cost = 0;
     for (int j = 1; j <= q.size(); ++j) {
@@ -59,19 +59,17 @@ int solve(Trie &trie, vector<string> &dict, string &q) {
         if (t == NULL) {
             break;
         }
-        int most_common = t->most_common_word();
-        string &s = dict[most_common];
+        string *most_common = t->most_common_word();
         if (most_common != prev_most_common) {
-            if (prev_most_common >= 0) {
-                string &ps = dict[prev_most_common];
-                running_cost += min(j - prev_most_common_start, (int) ps.size() - j + 3);
+            if (prev_most_common != NULL) {
+                running_cost += min(j - prev_most_common_start, (int) prev_most_common->size() - j + 3);
             } else {
                 running_cost += j - prev_most_common_start;
             }
             prev_most_common_start = j;
         }
         prev_most_common = most_common;
-        ans = min(ans, (int) (s.size() + q.size() - 2 * j + running_cost + 1));
+        ans = min(ans, (int) (most_common->size() + q.size() - 2 * j + running_cost + 1));
     }
     return ans;
 }
@@ -79,18 +77,19 @@ int solve(Trie &trie, vector<string> &dict, string &q) {
 int main() {
     int n, m;
     cin >> n >> m;
-    vector<string> dict(n);
-    Trie trie(-1);
+    string *dict = new string[n];
+    Trie trie((string *) -1);
     for (int i = 0; i < n; ++i) {
         string s;
         cin >> s;
-        trie.insert(s, i);
         dict[i] = s;
+        trie.insert(&dict[i]);
     }
     for (int i = 0; i < m; ++i) {
         string q;
         cin >> q;
-        int ans = solve(trie, dict, q);
+        int ans = solve(trie, q);
         cout << ans << endl;
     }
+    delete[] dict;
 }
