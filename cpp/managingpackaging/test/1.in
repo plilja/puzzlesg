@@ -1,0 +1,20 @@
+14
+libattr
+vim-X11 vim-common gtk2 libattr
+vim-common
+gtk2 libtiff atk pango glib2
+libtiff zlib libjpeg
+atk
+pango xorg-x11-libs freetype glib2
+glib2
+zlib
+libjpeg
+xorg-x11-libs grep freetype
+grep pcre
+pcre
+freetype
+3
+emacs xorg-x11 lisp
+xorg-x11
+lisp emacs
+0

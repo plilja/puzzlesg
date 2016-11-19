@@ -1,0 +1,17 @@
+atk
+freetype
+glib2
+libattr
+libjpeg
+pcre
+grep
+vim-common
+xorg-x11-libs
+pango
+zlib
+libtiff
+gtk2
+vim-X11
+
+cannot be ordered
+
