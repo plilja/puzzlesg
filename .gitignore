@@ -32,7 +32,6 @@
 *~
 *.project
 *.cdt*
-*.swp
 
 bin/
 Debug/
@@ -45,6 +44,16 @@ Contents/
 #haskell
 *.hi
 
+#python
+__pycache__
+*.pyc
 
 unsolved
 ignored
+.DS_Store
+
+# vim
+.swn
+.swo
+*.swp
+
