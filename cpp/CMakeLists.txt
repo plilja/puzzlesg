@@ -13,6 +13,7 @@ add_executable(arcticnetwork arcticnetwork/arcticnetwork.cpp arcticnetwork/minsp
 add_executable(autocorrect autocorrect/autocorrect.cpp)
 add_executable(bachetsgame bachetsgame/bachetsgame.cpp)
 add_executable(backspace backspace/backspace.cpp)
+add_executable(balanceddiet balanceddiet/balanceddiet.cpp)
 add_executable(baloni baloni/baloni.cpp)
 add_executable(base2palindrome base2palindrome/base2palindrome.cpp)
 add_executable(beavergnaw beavergnaw/beavergnaw.cpp)
