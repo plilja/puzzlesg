@@ -87,6 +87,7 @@ add_executable(islandhopping islandhopping/islandhopping.cpp islandhopping/minsp
 add_executable(islands islands/islands.cpp)
 add_executable(jakube jakube/jakube.cpp jabuke/pointinpolygon.cpp)
 add_executable(jetpack jetpack/jetpack.cpp)
+add_executable(juryjeopardy juryjeopardy/juryjeopardy.cpp)
 add_executable(keyboard keyboard/keyboard.cpp)
 add_executable(keypad keypad/keypad.cpp)
 add_executable(kinarow kinarow/kinarow.cpp)
