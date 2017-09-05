@@ -5,6 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_executable(10kindsofpeople 10kindsofpeople/10kindsofpeople.cpp)
 add_executable(2048 2048/2048.cpp)
+add_executable(3dprinter 3dprinter/3dprinter.cpp)
 add_executable(4thought 4thought/4thought.cpp)
 add_executable(ada ada/ada.cpp)
 add_executable(anotherdice anotherdice/anotherdice.cpp)
