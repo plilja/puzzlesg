@@ -1,0 +1,9 @@
+4
+<foo>
+<bar>
+<foo> b <foo>
+<bar> <bar> b
+<foo> <foo> b <foo>
+<bar> <bar> <bar> b
+<foo> <foo> b <foo> a
+<bar> <bar> <bar> b <bar>
