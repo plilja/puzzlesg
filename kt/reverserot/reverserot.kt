@@ -12,7 +12,7 @@ class Reverserot {
 
 const val ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_."
 
-tailrec fun run(input: Scanner) {
+private tailrec fun run(input: Scanner) {
     val n = input.nextInt()
     if (n == 0) {
         return
