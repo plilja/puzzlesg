@@ -1,12 +1,12 @@
 from collections import Counter
 
-s = input()
+s = input().strip()
 digits = Counter([int(i) for i in s])
 
 m = len(s) + 1
 min_digit = 0
 for d in digits:
-    if digits[d] < m and d != 0:
+    if d != 0 and (digits[d] < m or (digits[d] == m and d < min_digit)):
         m = digits[d]
         min_digit = d
 
@@ -18,8 +18,7 @@ elif non_present_digits:
     if non_present_digits[0] == 0:
         non_present_digits = non_present_digits[1:]
     print(non_present_digits[0])
+elif digits[0] + 1 <= m:
+    print('1' + '0' * (digits[0] + 1))
 else:
-    if digits[0] + 1 <= m:
-        print('1' + '0' * (digits[0] + 1))
-    else:
-        print(str(min_digit) * (m + 1))
+    print(str(min_digit) * (m + 1))
