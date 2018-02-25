@@ -58,7 +58,9 @@ int main()
             assert(m == 'r');
             x++;
         }
-        map[y][x] = '*';
+        if (map[y][x] != 'S') {
+            map[y][x] = '*';
+        }
     }
     map[y][x] = 'E';
     for (int i = 0; i < (int)map.size(); ++i) {
