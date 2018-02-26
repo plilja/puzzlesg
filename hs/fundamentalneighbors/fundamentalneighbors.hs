@@ -3,29 +3,35 @@ import qualified Data.ByteString.Char8 as BS
 import Data.Maybe
 import qualified Data.List as L
 
+m = 46341 -- m ** 2 > 2**31
+
 main = do
     inp <- liftM (map readInt . BS.lines) BS.getContents
-    let ans = map (\i -> (i, neighbour i)) inp
-    mapM (\(a, b) -> BS.putStrLn (BS.pack (show a ++ " " ++ show b))) ans
+    let primes = sieve m
+        ans = map (\i -> (i, neighbour primes i)) inp
+        output = unlines $ map (\(a, b) -> show a ++ " " ++ show b) ans
+    BS.putStr (BS.pack output)
 
-readInt :: BS.ByteString -> Integer
-readInt bs = toInteger $ fst $ fromJust $ BS.readInt bs
+readInt :: BS.ByteString -> Int
+readInt bs = fst $ fromJust $ BS.readInt bs
 
-neighbour x = product $ map (\(a, b) -> b^a) $ primeFactorsMult x
+sieve n = 2:(sieve' [x | x <- [3,5..n]])
 
-primeFactorsMult :: Integer -> [(Integer, Integer)]
-primeFactorsMult = map (\xs -> (head xs, toInteger (length xs))) . L.group . primeFactors
+sieve' [] = []
+sieve' (p:ns) = p:(sieve' [n | n <- ns, rem n p /= 0])
 
-intSqrt :: Integer -> Integer
+neighbour primes x = product $ map (\(a, b) -> b^a) $ primeFactorsMult primes x
+
+primeFactorsMult :: [Int] -> Int -> [(Int, Int)]
+primeFactorsMult primes n = let primeCandidates = takeWhile (<= (intSqrt n)) primes
+                                primeFactors' = filter (\i -> rem n i == 0) primeCandidates
+                                primeFactors = if primeFactors' == [] then [n] else primeFactors'
+                             in map (\p -> (p, power n p)) primeFactors
+
+power :: Int -> Int -> Int
+power n p | n < p = 0
+          | rem n p /= 0 = 0
+          | otherwise = 1 + power (n `div` p) p
+
+intSqrt :: Int -> Int
 intSqrt n = floor $ sqrt $ fromIntegral n
-
-primeFactors' :: Integer -> Integer -> Integer -> [Integer]
-primeFactors' s lim 1 = []
-primeFactors' s lim n
-    | s > lim = [n]
-    | rem n s == 0 = let r = n `div` s
-                    in s:primeFactors' s (intSqrt r) (r)
-    | otherwise = primeFactors' (s+1) lim n
-
-primeFactors :: Integer -> [Integer]
-primeFactors n = primeFactors' 2 (floor (sqrt (fromIntegral n))) n
