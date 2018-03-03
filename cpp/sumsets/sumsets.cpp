@@ -1,17 +1,16 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 #include <algorithm>
 
 using namespace std;
 
-const unsigned int M = 540000000;
-
 pair<bool, int> solve(vector<int> &v, int n) {
-    vector<bool> two_sums(M*4, false);
+    unordered_map<int, vector<pair<int, int>>> two_sums;
     sort(v.begin(), v.end());
     for (int i = 0; i < n; ++i) {
         for (int j = i + 1; j < n; ++j) {
-            two_sums[v[i] + v[j] + 2*M] = true;
+            two_sums[v[i] + v[j]].push_back({i, j});
         }
     }
     for (int i = n - 1; i >= 0; --i) {
@@ -22,14 +21,12 @@ pair<bool, int> solve(vector<int> &v, int n) {
             }
             int c = v[j];
             int a_plus_b = d - c;
-            if (two_sums[a_plus_b + 2*M]) {
-                for (int k = 0; k < n; ++k) {
-                    for (int h = 0; h < n; ++h) {
-                        if (v[k] + v[h] == a_plus_b && k != h && j != k && j != h && i != k && i != h) {
-                            return {true, d};
-                        }
+            auto it = two_sums.find(a_plus_b);
+            if (it != two_sums.end()) {
+                for (auto &p : it->second) {
+                    if (p.first != i && p.first != j && p.second != i && p.second != j) {
+                        return {true, d};
                     }
-
                 }
             }
         }
