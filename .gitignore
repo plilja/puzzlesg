@@ -57,3 +57,8 @@ ignored
 .swo
 *.swp
 
+# c#
+cs.csproj
+cs.sln
+cs.userprefs
+obj/
