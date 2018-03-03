@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <cmath>
 
 using namespace std;
@@ -50,11 +51,12 @@ pii w1_or_w2_is_zero(int n, int maria_x1, int maria_x2, vector<pii> &products) {
 pii w1_or_w2_is_not_zero(int n, int maria_x1, int maria_x2, vector<pii> &products) {
     int best = n + 1,
         worst = 0;
-    for (int w1 = 1; w1 < MAX; ++w1) {
+    sort(products.begin(), products.end());
+    for (int w1 = 1; w1 <= MAX; ++w1) {
         int beats = 0;
-        vector<int> delta(MAX, 0);
-        vector<int> equal_minus(MAX, 0);
-        vector<int> equal_plus(MAX, 0);
+        vector<int> delta(MAX + 1, 0);
+        vector<int> equal_minus(MAX + 1, 0);
+        vector<int> equal_plus(MAX + 1, 0);
         int exactly_equal = 0;
         for (pii product : products) {
             int x1 = product.first,
@@ -63,11 +65,9 @@ pii w1_or_w2_is_not_zero(int n, int maria_x1, int maria_x2, vector<pii> &product
                 d = maria_x2 - x2;
             if (a < 0) {
                 beats += 1;
-            }
-            if (a == 0 && d < 0) {
+            } else if (a == 0 && d < 0) {
                 beats += 1;
-            }
-            if (a == 0 && d == 0) {
+            } else if (a == 0 && d == 0) {
                 exactly_equal += 1;
             }
             if (sign(a) == sign(d) || d == 0) {
@@ -75,19 +75,19 @@ pii w1_or_w2_is_not_zero(int n, int maria_x1, int maria_x2, vector<pii> &product
                 continue;
             }
             int overtake_point = abs((abs(a) + abs(d) - 1) / abs(d));
-            if (overtake_point >= MAX) {
-                continue;
-            }
-            if (a + d * overtake_point == 0) {
-                if (a < 0)
-                    equal_minus[overtake_point] += 1;
-                else
-                    equal_plus[overtake_point] += 1;
-            } else {
-                delta[overtake_point] += sign(a);
-            }
+            if (overtake_point <= MAX) {
+                if (a + d * overtake_point == 0) {
+                    if (a < 0) {
+                        equal_minus[overtake_point] += 1;
+                    } else {
+                        equal_plus[overtake_point] += 1;
+                    }
+                } else {
+                    delta[overtake_point] += sign(a);
+                }
+            } 
         }
-        for (int w2 = 1; w2 < MAX; ++w2) {
+        for (int w2 = 1; w2 <= MAX; ++w2) {
             beats += delta[w2];
             best = min(best, beats - equal_minus[w2] + 1);
             worst = max(worst, beats + equal_plus[w2] + 1 + exactly_equal);
