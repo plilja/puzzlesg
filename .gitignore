@@ -62,3 +62,6 @@ cs.csproj
 cs.sln
 cs.userprefs
 obj/
+
+# kotlin
+out/
