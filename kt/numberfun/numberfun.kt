@@ -1,21 +1,12 @@
 import java.util.*
 
-class Numberfun {
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            val input = Scanner(System.`in`)
-            run(input)
-        }
-    }
-}
-
-private fun run(scanner: Scanner) {
-    val n = scanner.nextInt()
+fun main(args: Array<String>) {
+    val input = Scanner(System.`in`)
+    val n = input.nextInt()
     for (i in 1..n) {
-        val a = scanner.nextInt()
-        val b = scanner.nextInt()
-        val c = scanner.nextInt()
+        val a = input.nextInt()
+        val b = input.nextInt()
+        val c = input.nextInt()
         val operators = listOf<(Int, Int, Int) -> Boolean>(
                 { x, y, z -> x + y == z },
                 { x, y, z -> x - y == z },
@@ -31,3 +22,4 @@ private fun run(scanner: Scanner) {
         }
     }
 }
+
