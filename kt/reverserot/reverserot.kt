@@ -1,15 +1,5 @@
 import java.util.*
 
-class Reverserot {
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            val input = Scanner(System.`in`)
-            run(input)
-        }
-    }
-}
-
 const val ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_."
 
 private tailrec fun run(input: Scanner) {
