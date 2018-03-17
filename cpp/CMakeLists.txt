@@ -49,6 +49,7 @@ add_executable(constrainedfreedomofchoice constrainedfreedomofchoice/constrained
 add_executable(conversationlog conversationlog/conversationlog.cpp)
 add_executable(conundrum conundrum/conundrum.cpp)
 add_executable(crypto crypto/crypto.cpp)
+add_executable(cudoviste cudoviste/cudoviste.cpp)
 add_executable(daceydice daceydice/daceydice.cpp)
 add_executable(dartscores dartscores/dartscores.cpp)
 add_executable(deathstar deathstar/deathstar.cpp)
